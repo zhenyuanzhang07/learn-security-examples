@@ -1,0 +1,14 @@
+1. Vulnerability Explanation and Prevention:
+    The vulnerability in the insecure version arises from the fact that user input (specifically, the user's name) is directly included in the HTML response without any sanitization. This oversight can lead to Cross-Site Scripting (XSS) attacks. In an XSS attack, an attacker can inject malicious scripts into web pages viewed by other users. For instance, an attacker could submit a name that contains a script tag (<script>alert('Hacked')</script>), and this script would execute in the browser of anyone viewing the page, potentially stealing cookies or performing actions on behalf of the users.
+
+    The secure version prevents this vulnerability by using the escapeHTML function to sanitize user input before it is included in the HTML response. This function replaces characters that have special meanings in HTML (<, >, &, ", ') with their corresponding HTML entities. This means that the browser will treat the sanitized input as plain text rather than executable HTML or JavaScript code, effectively preventing XSS attacks.
+
+2. CIA Property Violated by Tampering:
+    Tampering, in the context of an XSS attack, primarily violates the Integrity principle of the CIA triad. Integrity is compromised because the attacker can alter the intended functionality of the web application through the injection of malicious scripts. This can lead to unauthorized actions being performed, data being altered, or malicious content being presented to users, all of which undermine the trustworthiness and accuracy of the information and operations provided by the application.
+
+    While the primary target of tampering in XSS attacks is integrity, such attacks can also indirectly affect Confidentiality (if the attack leads to unauthorized access to sensitive information) and Availability (if the attack disrupts the normal operation of the application or makes it unavailable to legitimate users). However, the most direct impact of XSS, as a form of tampering, is on integrity.
+
+
+
+
+

@@ -1,1 +1,15 @@
 Briefly explain the vulnerability and why the secure version prevents the vulnerability.
+
+1. Vulnerability Explanation and Prevention:
+
+    a. Session Hijacking: This vulnerability is present in the insecure version due to the httpOnly: false flag in the cookie options. This setting allows JavaScript running in the browser to access the session cookie. An attacker can exploit this to steal the session cookie using a cross-site scripting (XSS) attack, leading to session hijacking. The secure version sets httpOnly: true, preventing client-side scripts from accessing the cookie, thus mitigating the risk of session hijacking.
+
+    b. Cross-site Request Forgery (CSRF): The insecure version is vulnerable to CSRF attacks because it does not implement any form of CSRF protection. In CSRF, an attacker can trick the victim into submitting a request (e.g., changing their user name or performing sensitive operations) without their knowledge, using the victim's authenticated session. The secure version mitigates this risk by setting the sameSite: true cookie attribute, which restricts the cookie from being sent in cross-site requests. This helps in preventing CSRF attacks by ensuring that requests are only sent with cookies if the origin of the request is the same as the target site.
+
+2. CIA Properties Violated by Spoofing:
+
+    a. Confidentiality: Spoofing violates the confidentiality principle by potentially allowing unauthorized access to sensitive information. For example, in session hijacking, an attacker gaining access to a user's session can view sensitive information intended for the user.
+
+    b. Integrity: Spoofing can also violate integrity by enabling attackers to make unauthorized changes. In the context of CSRF, an attacker could make changes to the victim's account or perform unauthorized actions, thus compromising the integrity of the data.
+
+    c. Availability: While spoofing primarily targets confidentiality and integrity, certain forms of spoofing attacks could indirectly affect availability. For instance, if an attacker uses a hijacked session to delete accounts or disrupt services, it could impact the availability of the service for legitimate users.
