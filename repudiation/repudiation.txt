@@ -1,2 +1,11 @@
 - Briefly explain the vulnerability and why the secure version is better at preventing repudiation than the insecure version.
+    The vulnerability is related to repudiation threats, where an actor (e.g., a user or attacker) can deny the actions they performed because there is no mechanism to log or trace their activities. Repudiation threats are a significant concern in security because they make it difficult to audit and verify actions taken by users, which is crucial for non-repudiation. Non-repudiation ensures that actions or events can be proven to have occurred, so actors cannot deny their involvement.
+    The secure version introduces several enhancements that improve the system's ability to prevent repudiation:
+        Logging of Requests and Actions: By logging each request (including method, URL, and IP address) and actions (such as sending messages with the user and message content), the application creates an audit trail. This audit trail can be used to verify who took what action and when, significantly reducing the risk of repudiation.
+        Authentication Mechanism Placeholder: Although the secure version mentions a placeholder for user authentication (isAuthenticated), implementing a robust authentication mechanism would ensure that actions can be attributed to specific, verified users.
+    These improvements make it possible to trace actions back to individual users, which is vital for accountability and non-repudiation.
+
 - What additional security mechanisms can you incorporate to prevent such attacks?
+   1. Digital Signatures: Use digital signatures to verify the integrity and origin of messages. A digital signature ensures that a message was not altered in transit and confirms the identity of the sender, providing strong non-repudiation.
+   2. Comprehensive Authentication and Authorization: Implement comprehensive authentication mechanisms (like JWT tokens, OAuth) and authorization checks to ensure that users are who they claim to be and are allowed to perform the actions they're attempting.
+   3. Secure Logging: Ensure that logs are tamper-evident and stored securely. This might include using log management solutions that support encryption, access control, and regular backups.

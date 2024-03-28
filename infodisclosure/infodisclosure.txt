@@ -1,3 +1,13 @@
 Briefly explain the vulnerability and why the secure version prevents the vulnerability.
+    The vulnerability in the given code is a NoSQL Injection vulnerability. This occurs when the application unsafely uses user input in database queries without proper validation or sanitization. In the vulnerable version, the username from the request query is directly used in the User.findOne() function call. An attacker could exploit this by crafting a query in the username parameter that manipulates the query's logic, potentially allowing unauthorized access to data or the ability to perform malicious operations on the database. 
+    The secure version prevents this vulnerability by implementing two key security practices: input validation and input sanitization.
+        Input Validation: It checks if the username is a string. This simple check can prevent injection attacks that rely on the ability to pass complex data types (like objects or arrays) to the query.
+        Input Sanitization: It removes non-alphanumeric characters from the username by replacing them with an empty string. This reduces the risk of special characters being used to alter the query logic (e.g., operators or command sequences in NoSQL queries).
+
 Which CIA property does tampering violate?
+    Tampering violates the Integrity aspect of the CIA (Confidentiality, Integrity, Availability) triad. Integrity ensures that data is accurate, consistent, and not modified in an unauthorized manner. NoSQL Injection attacks can alter the intended database queries, leading to unauthorized data modifications, deletions, or disclosures, directly compromising data integrity.
+
 What additional security mechanisms can you incorporate?
+   1. Parameterized Queries: Use methods that inherently treat the input as data, not executable code. This might not be directly applicable to NoSQL databases but adhering to similar practices where possible is beneficial.
+   2. Least Privilege Access: Ensure the database user the application connects with only has permissions necessary for its operations. This limits the potential impact of an injection attack.
+   3. Use of Security Libraries and Tools: Implement libraries that are designed to prevent injection attacks, such as ORM (Object-Relational Mapping) or ODM (Object Document Mapping) tools that abstract database interactions and reduce direct query manipulations.
